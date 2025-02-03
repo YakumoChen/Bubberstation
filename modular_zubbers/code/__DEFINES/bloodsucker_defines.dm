@@ -30,7 +30,7 @@
 #define HUMANITY_LOST_MAXIMUM 50
 
 /// Level up blood cost define, max_blood * this = blood cost
-#define BLOODSUCKER_LEVELUP_PERCENTAGE 0.45
+#define BLOODSUCKER_LEVELUP_PERCENTAGE 0.40
 #define BLOODSUCKER_LEVELUP_PERCENTAGE_VENTRUE BLOODSUCKER_LEVELUP_PERCENTAGE - 0.1
 
 ///The level when at a bloodsucker becomes snobby about who they drink from and gain their non-fledling reputation
@@ -59,12 +59,12 @@
 /**
  * Ghoul defines
  */
-///If someone passes all checks and can be ghoulized
-#define GHOULIZATION_ALLOWED 0
-///If someone has to accept ghoulization
-#define GHOULIZATION_DISLOYAL 1
+///If someone passes all checks and can be ghouled
+#define GHOULING_ALLOWED 0
+///If someone has to accept ghouling
+#define GHOULING_DISLOYAL 1
 ///If someone is not allowed under any circimstances to become a Ghoul
-#define GHOULIZATION_BANNED 2
+#define GHOULING_BANNED 2
 
 /**
  * Cooldown defines

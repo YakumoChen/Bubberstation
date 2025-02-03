@@ -63,7 +63,7 @@
 	message = "screams!"
 	message_mime = "acts out a scream!"
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
-	audio_cooldown = 5 SECONDS
+	specific_emote_audio_cooldown = 10 SECONDS
 	vary = TRUE
 
 /datum/emote/living/carbon/human/scream/can_run_emote(mob/user, status_check = TRUE , intentional, params)
@@ -168,7 +168,7 @@
 
 /datum/emote/living/carbon/human/clear_throat
 	key = "clear"
-	key_third_person = "clears throat"
+	key_third_person = "clearthroat"
 	message = "clears their throat."
 
 ///Snowflake emotes only for le epic chimp

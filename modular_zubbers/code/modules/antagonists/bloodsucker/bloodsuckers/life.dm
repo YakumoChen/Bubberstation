@@ -21,8 +21,6 @@
 		return
 	if(owner.current.stat == CONSCIOUS && !HAS_TRAIT(owner.current, TRAIT_IMMOBILIZED) && !is_in_torpor())
 		INVOKE_ASYNC(src, PROC_REF(AdjustBloodVolume), -BLOODSUCKER_PASSIVE_BLOOD_DRAIN) // -.1 currently
-	INVOKE_ASYNC(src, PROC_REF(update_blood))
-	INVOKE_ASYNC(src, PROC_REF(HandleStarving))
 
 /datum/antagonist/bloodsucker/proc/life_active()
 	if(HandleHealing())
@@ -228,8 +226,7 @@
 		bloodsuckeruser.cure_husk(CHANGELING_DRAIN)
 
 	bloodsuckeruser.cure_husk(BURN)
-	for(var/datum/wound/wound as anything in bloodsuckeruser.all_wounds)
-		wound.remove_wound()
+
 	if(bloodsuckeruser.get_organ_slot(ORGAN_SLOT_HEART))
 		bloodsuckeruser.regenerate_organs(regenerate_existing = FALSE)
 
@@ -291,6 +288,11 @@
 		return
 	check_begin_torpor(TORPOR_SKIP_CHECK_ALL)
 
+/datum/antagonist/bloodsucker/proc/HandleBlood()
+	INVOKE_ASYNC(src, PROC_REF(update_blood))
+	INVOKE_ASYNC(src, PROC_REF(HandleStarving))
+	return HANDLE_BLOOD_NO_OXYLOSS | HANDLE_BLOOD_NO_NUTRITION_DRAIN
+
 /datum/antagonist/bloodsucker/proc/HandleStarving() // I am thirsty for blood!
 	// Nutrition - The amount of blood is how full we are.
 	owner.current.set_nutrition(min(bloodsucker_blood_volume, NUTRITION_LEVEL_FED))
@@ -346,8 +348,8 @@
 	owner.current.blood_volume = bloodsucker_blood_volume
 
 /// Turns the bloodsucker into a wacky talking head.
-/datum/antagonist/bloodsucker/proc/talking_head()
-	var/mob/living/poor_fucker = owner.current
+/datum/antagonist/bloodsucker/proc/talking_head(mob/target)
+	var/mob/living/poor_fucker = target
 	if(QDELETED(poor_fucker))
 		return
 	// Don't do anything if we're not actually inside a brain and a head
